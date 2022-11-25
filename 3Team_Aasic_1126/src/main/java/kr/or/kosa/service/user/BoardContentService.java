@@ -11,7 +11,7 @@ import kr.or.kosa.action.Action;
 import kr.or.kosa.action.ActionForward;
 import kr.or.kosa.dao.MemberDao;
 import kr.or.kosa.dto.Board;
-import kr.or.kosa.dto.Files;
+import kr.or.kosa.dto.Reply;
 
 
 
@@ -30,11 +30,7 @@ public class BoardContentService implements Action {
 			boolean isread = false;
 			String filename = "";
 			
-			System.out.println("보드컨텐츠idx : "+idx);
-			System.out.println("보드컨텐츠cpage : "+cpage);
-			System.out.println("보드컨텐츠pagesize : "+pagesize);
-			System.out.println("보드컨텐츠boardname : "+boardname);
-			
+			List<Reply> replyList = new ArrayList<>();
 			Board board = new Board();
 			MemberDao dao = new MemberDao();
 			filename = dao.FileList(idx);
@@ -60,19 +56,25 @@ public class BoardContentService implements Action {
 				pagesize = "5"; 
 			}
 			
+			int idx2 = Integer.parseInt(idx);
+
 			isread = memberDao.getReadNum(idx);
 			
 			if(isread) {
 				board = memberDao.getContent(Integer.parseInt(idx));
+				replyList = memberDao.replylist(Integer.parseInt(idx));
 			}
 			
-			
+			int lovecount = memberDao.loveCount(idx2);
 			
 			request.setAttribute("board", board);
 			request.setAttribute("idx", idx);
 			request.setAttribute("cp", cpage);
 			request.setAttribute("ps", pagesize);
 			request.setAttribute("filename", filename);
+			request.setAttribute("replyList", replyList);
+			request.setAttribute("lovecount", lovecount);
+
 			
 			forward = new ActionForward();
 			forward.setRedirect(false); // forward
