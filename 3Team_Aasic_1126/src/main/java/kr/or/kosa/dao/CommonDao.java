@@ -192,7 +192,11 @@ public class CommonDao {
 			pstmt2.setString(1, member.getUserid());
 			pstmt2.setString(2, member.getIp());
 			resultRow = pstmt2.executeUpdate();
-
+			
+			sql3 = "insert into usergrade(userid, gradename, totallovecount) values(?, 'bronze', 0)";
+			pstmt3 = conn.prepareStatement(sql3);
+			pstmt3.setString(1, member.getUserid());
+			resultRow = pstmt3.executeUpdate();
 
 			conn.commit();
 			conn.setAutoCommit(true);

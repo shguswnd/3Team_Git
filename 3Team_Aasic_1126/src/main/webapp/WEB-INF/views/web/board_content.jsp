@@ -235,15 +235,6 @@ $(function(){
 				});  */
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//첨부파일 상세보기 비동기 
 	$('#fileDetail').click(function(){
 		//비동기 함수 호출
@@ -364,10 +355,12 @@ $(function(){
 							<td>**</td>
 		   		 			</c:otherwise>
 						</c:choose>   
+						<td width="20%" align="center"><b>추천수</b></td>
+							<td colspan="3"><a id="love1">${lovecount}</a></td>
 					</tr>
 					<!-- //////////////// -->
 					<tr>
-						<td width="20%" align="center"><b>첨부파일</b></td>
+							<td width="20%" align="center"><b>첨부파일</b></td>
 						<td><c:choose>
 								<c:when test="${filename != null && fn:length(filename) > 10}">
 									${fn:substring(filename,0,15)}...
@@ -378,7 +371,6 @@ $(function(){
 										상세보기</button>
 								</c:otherwise>
 							</c:choose></td>
-						<td width="20%" align="center"><b>추천수</b></td>
 					</tr>
 					<tr>
 						<td width="20%" align="center"><b>제목</b></td>
@@ -391,9 +383,9 @@ $(function(){
 							<div id="fileList"></div> <!-- style="display: none; -->
 						</td>
 					</tr>
-					<tr>
+					<%-- <tr>
 						<td colspan="4" align="center"><a id="love1">${lovecount}</a></td>
-					</tr>
+					</tr> --%>
 					<tr>
 						<td colspan="4" align="center"><a
 							href="javascript:history.back();">목록가기</a> <a
