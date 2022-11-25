@@ -26,14 +26,7 @@ public class BoardEditOk implements Action {
 		String msg = "";
 		String url = "";
 		ActionForward forward = null;
-		
-		System.out.println("================EditOK서비스=================");
-		System.out.println("여기로 오긴오나?");
-		System.out.println("boardname : "+boardname);
-		System.out.println("userid : "+userid);
-		System.out.println("writeruserid : "+writeruserid);
-		System.out.println("filename : "+filename);
-		
+				
 		try {
 			MemberDao dao = new MemberDao();
 			if(!(userid.equals(writeruserid))) {
@@ -68,7 +61,6 @@ public class BoardEditOk implements Action {
 			forward.setPath("/WEB-INF/views/web/redirect.jsp");  //수정 알림창
 			
 		} catch (NamingException e) {
-			// TOboard Auto-generated catch block
 			e.printStackTrace();
 		}
 

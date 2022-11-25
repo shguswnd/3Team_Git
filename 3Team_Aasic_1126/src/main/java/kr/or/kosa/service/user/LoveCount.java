@@ -21,26 +21,16 @@ public class LoveCount implements Action {
 		try {
 			MemberDao memberDao;
 			memberDao = new MemberDao();
-			
-			System.out.println("LoveCount 진입 성공");
-
 			int idx = Integer.parseInt(request.getParameter("idx"));
-			System.out.println("idx parameter: " + idx);
-
 			lovecount = memberDao.loveCount(idx);
 			request.setAttribute("lovecount", lovecount);
-			System.out.println(lovecount);
-			
-
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-
 		forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("/WEB-INF/views/board/board_content.jsp");
 		
-		System.out.println("카운트 포워드 직전");
 		
 		return forward;
 	}

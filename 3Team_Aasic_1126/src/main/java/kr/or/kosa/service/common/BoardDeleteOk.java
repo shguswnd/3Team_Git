@@ -19,10 +19,6 @@ public class BoardDeleteOk implements Action {
 		String writer = request.getParameter("writerid");  //작성자 아이디
 		String boardname = request.getParameter("boardname");
 		
-		System.out.println("idx : "+idx);
-		System.out.println("userid : "+userid);
-		System.out.println("writeruserid : "+writer);
-		System.out.println("삭제OK서비스-boardname : "+boardname);
 		
 		String msg="";
 		String url="";
@@ -35,9 +31,7 @@ public class BoardDeleteOk implements Action {
 				msg="작성자 본인이 아닙니다";
 				url="boardContent.user?idx=" + idx;
 			} else{
-				System.out.println("DAO를 향해");
 				int result = dao.deleteOk(idx, userid);
-				System.out.println("DAO를 향해 - 1");
 				if(result > 0){
 					msg="삭제완료";
 					url="boardList.user?boardname="+boardname;
@@ -50,7 +44,6 @@ public class BoardDeleteOk implements Action {
 			
 			
 		} catch (NamingException e) {
-			// TOboard Auto-generated catch block
 			e.printStackTrace();
 		}
 		

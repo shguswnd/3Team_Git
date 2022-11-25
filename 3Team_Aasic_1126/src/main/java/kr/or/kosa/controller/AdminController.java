@@ -25,7 +25,6 @@ public class AdminController extends HttpServlet {
   
     public AdminController() {
         super();
-        
     }
     private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    	
        	String requestURI = request.getRequestURI();

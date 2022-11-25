@@ -15,12 +15,11 @@ public class BoardViewService implements Action {
 		try {
 			String boardname = request.getParameter("boardname");
 			request.setAttribute("boardname", boardname);
-			System.out.println(boardname);
     		forward = new ActionForward();
     		forward.setRedirect(false);
     		if(boardname.equals("공지사항"))
     		{
-        		forward.setPath("/WEB-INF/views/admin/boardNotice_write.jsp");    			
+    			forward.setPath("/WEB-INF/views/admin/boardNotice_write.jsp");    			
     		}else if(boardname.equals("자유게시판")) {
         		forward.setPath("/WEB-INF/views/web/boardFree_write.jsp");
     		}else if(boardname.equals("질문과답변")) {

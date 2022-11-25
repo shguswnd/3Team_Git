@@ -26,14 +26,6 @@ public class BoardFileDownloadService implements Action {
 		String savepath = "upload";  //폴더명
 		String downloadpath = root+ savepath+ "\\"+ filename;
 	    
-		System.out.println("session : "+session);
-		System.out.println("root : "+root);
-		System.out.println("context : "+context);
-		System.out.println("savepath : "+savepath);
-		System.out.println("downloadpath : "+downloadpath);
-	    //PrintWriter out = response.getWriter();
-	    //out.print(downloadpath +"<br>");
-	    //out.print(FilePath); //실경로 + 파일명
 		byte[] b;
 		FileInputStream in;
 		
@@ -73,12 +65,9 @@ public class BoardFileDownloadService implements Action {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	    
 	    forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("/WEB-INF/views/web/redirect.jsp");
-
 		return forward;
 	}
-
 }

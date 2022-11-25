@@ -17,13 +17,6 @@ import kr.or.kosa.dto.Member;
 import kr.or.kosa.dto.MemberDetail;
 
 
-
-//sql1 = "select md.userid as userid, md.pwd as pwd, m.status as status from memberdetail md "
-//		+ "inner join member m "
-//		+ "on md.userid = m.userid "
-//		+ "where md.userid=?";
-// 조인 하는법 알려주기.
-
 public class CommonDao {
 
 	DataSource ds = null;
@@ -154,19 +147,6 @@ public class CommonDao {
 		return idCheck;
 	}
 
-//	public List<Users>getUserList(){
-//		
-//		
-//		return dtoList;
-//	}
-
-	/*
-	 * public List<User>getUserList(){
-	 * 
-	 * 
-	 * return dtoList; }
-	 */
-
 	// 회원가입
 	public int writeOk(Member member, MemberDetail memberDetail) {
 		try {
@@ -229,16 +209,11 @@ public class CommonDao {
 				System.out.println("DAOuserid 1: "+userid);
 				
 				String sql_userid = "select userid from board where idx=?"; // 비번검증
-				//String sql_reply = "update board set replystatus=0 where idx_fk=?"; // 테이블에 cascade 처리하면 알아서 자식도 지워짐
 				String sql_board = "update board set boardstatus=0 where idx=?"; // 게시글 삭제
-//				String sql_reply = "delete from reply where idx_fk=?"; // 테이블에 cascade 처리하면 알아서 자식도 지워짐
-//				String sql_board = "delete from board where idx=?"; // 게시글 삭제
 				pstmt1 = conn.prepareStatement(sql_userid);
 				pstmt1.setString(1, idx);
 				rs1 = pstmt1.executeQuery();
 				
-				//System.out.println("DAOidx 2: "+idx);
-				//System.out.println("DAOuserid 2: "+userid);
 				if (rs1.next()) { // 삭제글은 존재
 					// 사용자의 userid, DB의 userid
 					if (userid.equals(rs1.getString("userid"))) { // userid가 맞다면
@@ -258,13 +233,6 @@ public class CommonDao {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				// rollback
-				// 예외가 발생하면
-//				try {
-//					conn.rollback();
-//				} catch (SQLException e1) {
-//					e1.printStackTrace();
-//				}
 			} finally {
 				try {
 					pstmt1.close();
@@ -281,7 +249,6 @@ public class CommonDao {
 		public int userDelete(String userid) {
 			try {
 				conn = ds.getConnection();
-				//conn.setAutoCommit(false);
 				System.out.println("userid11 : "+userid);
 				sql1 = "update member set status=0 where userid = ?";
 				System.out.println(sql1);
@@ -291,22 +258,8 @@ public class CommonDao {
 				resultRow = pstmt1.executeUpdate();
 				System.out.println(resultRow);
 				System.out.println("userid22 : "+userid);
-				//sql2 = "update from member status=0 where userid=?";
-//				pstmt2 = conn.prepareStatement(sql2);
-//				pstmt2.setString(1, userid);
-//				resultRow = pstmt2.executeUpdate();
-
-				//conn.commit();
-				//conn.setAutoCommit(true);
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
-//				try {
-//					//conn.rollback();
-//				} catch (Exception e1) {
-//					e1.printStackTrace();
-//				}
-
 			} finally {
 				try {
 					pstmt1.close();

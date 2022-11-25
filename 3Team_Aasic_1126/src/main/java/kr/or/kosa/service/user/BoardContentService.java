@@ -38,7 +38,6 @@ public class BoardContentService implements Action {
 			MemberDao memberDao = new MemberDao();
 			// 글 번호를 가지고 오지 않았을 경우 예외처리
 			if (idx == null || idx.trim().equals("")) {
-				System.out.println("여기안옴");
 				response.sendRedirect("BoardList.user?boardname="+boardname);
 				return null;
 			}
@@ -81,7 +80,6 @@ public class BoardContentService implements Action {
 			forward.setPath("/WEB-INF/views/web/board_content.jsp");
 
 		} catch (Exception e) {
-			System.out.println("??");
 			e.printStackTrace();
 		}
 		return forward;

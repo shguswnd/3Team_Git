@@ -68,21 +68,14 @@ public class MemberDao {
 			conn = ds.getConnection();
 			sql1 = "update MemberDetail set pwd=?, name=?, email=?, phone=?, address=?, gender=? where userid=?";
 			pstmt1 = conn.prepareStatement(sql1);
-			System.out.println("sql구문출력 : " + sql1);
-
 			pstmt1.setString(1, memberdetail.getPwd());
 			pstmt1.setString(2, memberdetail.getName());
 			pstmt1.setString(3, memberdetail.getEmail());
 			pstmt1.setString(4, memberdetail.getPhone());
 			pstmt1.setString(5, memberdetail.getAddress());
 			pstmt1.setString(6, memberdetail.getGender());
-			// pstmt.setDate(5, memberdetail.getStartDate());
-			// setDate(5, new java.sql.Date(memberdetail.getStartDate().getTime()));
 			pstmt1.setString(7, memberdetail.getUserid());
-			System.out.println();
-			System.out.println("memberdetail출력 : " + memberdetail.toString());
 			resultRow = pstmt1.executeUpdate();
-			System.out.println("resultRow 출력 : " + resultRow);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -91,7 +84,6 @@ public class MemberDao {
 				rs1.close();
 				conn.close();
 			} catch (Exception e2) {
-				// TODO: handle exception
 			}
 		}
 		return resultRow;
@@ -282,7 +274,6 @@ public class MemberDao {
 	// 글쓰기(파일 추가)
 	public int writeok(Board board, Files file) {
 		try {
-
 			resultRow = writeok(board);
 			conn = ds.getConnection();
 			conn.setAutoCommit(false);
@@ -353,7 +344,7 @@ public class MemberDao {
 				rs1.close();
 				conn.close();
 			} catch (Exception e2) {
-				// TODO: handle exception
+
 			}
 		}
 		return board;
@@ -379,7 +370,7 @@ public class MemberDao {
 				rs1.close();
 				conn.close();
 			} catch (Exception e2) {
-				// TODO: handle exception
+
 			}
 		}
 		return result;
@@ -533,7 +524,7 @@ public class MemberDao {
 	}
 
 	// 회원 등급 변경
-	// public memberGrade(S)
+
 
 	// 게시글 수정하기 화면(답글)
 	public Board getEditContent(String idx) {
@@ -542,18 +533,7 @@ public class MemberDao {
 	}
 
 	// 게시글 수정하기 처리
-	// public int boardEdit(HttpServletRequest boarddata) {
 	public int boardEdit(String idx, String userid, String content, String title, String filename) {
-//			String idx = boarddata.getParameter("idx");
-//			String userid = boarddata.getParameter("userid");
-//			String title = boarddata.getParameter("title");
-//			String content = boarddata.getParameter("content");
-		// String filename = boarddata.getParameter("filename");
-		System.out.println("게시물 수정 처리 DAO에 왔는지");
-		System.out.println("수정 DAo idx : " + idx);
-		System.out.println("수정 DAo userid : " + userid);
-		// System.out.println("수정 DAo filename : " + filename);
-//			System.out.println("보드데이터 투스트링 : "+boarddata);
 
 		try {
 			conn = ds.getConnection();
@@ -561,27 +541,19 @@ public class MemberDao {
 			String sql_udpate = "update board set userid=? , title=? , content=? where idx=?";
 			pstmt1 = conn.prepareStatement(sql_userid);
 			pstmt1.setString(1, idx);
-			// pstmt1.setString(2, pwd);
 			rs1 = pstmt1.executeQuery();
-			System.out.println("pstmt1 : " + pstmt1);
-			System.out.println("2 idx:" + idx);
 			// 판단 (데이터 있다며 : 수정가능 , 없다면 : 수정불가
 			if (rs1.next()) {
-				System.out.println("if문 들어오는지");
 				// 경고
 				pstmt1.close();
 				// 업데이트
 				pstmt1 = conn.prepareStatement(sql_udpate);
 				pstmt1.setString(1, userid);
-				// pstmt1.setString(2, email);
-				// pstmt1.setString(3, homepage);
 				pstmt1.setString(2, title);
 				pstmt1.setString(3, content);
 				pstmt1.setString(4, idx);
-				// pstmt1.setString(5, filename);
+
 				resultRow = pstmt1.executeUpdate();
-				System.out.println("마지막 resultrow : " + resultRow);
-				System.out.println("DAO의 끝까지 왔는지");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -609,7 +581,6 @@ public class MemberDao {
 			rs1 = pstmt1.executeQuery();
 			if (rs1.next()) {
 				filename = rs1.getString("filename");
-				System.out.println("filename : " + filename);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -629,8 +600,6 @@ public class MemberDao {
 	public boolean passwordCheck(String userid, String pwd) {
 
 		try {
-			System.out.println("userid 넘어왔는지? : " + userid);
-			System.out.println("pwd 넘어왔는지? : " + pwd);
 			conn = ds.getConnection();
 			sql1 = "select userid , pwd from memberdetail where userid=?";
 			pstmt1 = conn.prepareStatement(sql1);
@@ -662,7 +631,6 @@ public class MemberDao {
 	// 회원가입 시 아이디 체크
 	public int signIdCheck(String newid) {
 		try {
-			System.out.println("newid 넘어왔는지? : " + newid);
 			conn = ds.getConnection();
 			sql1 = "select userid from member where userid=?";
 			pstmt1 = conn.prepareStatement(sql1);
@@ -720,7 +688,7 @@ public class MemberDao {
 		ArrayList<Reply> list = null;
 
 		try {
-			/* System.out.println("조회까지 왔을까"); */
+
 			conn = ds.getConnection();
 			String reply_sql = "select * from reply where idx= ? order by replynum desc";
 
@@ -731,15 +699,6 @@ public class MemberDao {
 
 			list = new ArrayList<>();
 			while (rs1.next()) {
-				/*
-				 * MemberDao = new MemberDao(); int replynum =
-				 * Integer.parseInt(rs.getString("replynum")); int parentreply =
-				 * rs.getInt("parentreply"); String userid = rs.getString("userid"); int
-				 * refernum = rs.getInt("refernum"); int depth = rs.getInt("depth"); int
-				 * replycheck = rs.getInt("replycheck"); String content
-				 * =rs.getString("content"); java.sql.Date replydate = rs.getDate("replydate");
-				 * idx = Integer.parseInt(rs.getString("idx"));
-				 */
 
 				Reply replydto = new Reply();
 				replydto.setReplynum(Integer.parseInt(rs1.getString("replynum")));
@@ -773,8 +732,6 @@ public class MemberDao {
 
 	public int replyDelete(String no) {
 		try {
-			System.out.println("MemberDao" + no);
-			/* String replyselect = "select pwd from reply where no=?"; */
 			String replydelete = "delete from reply where replynum=?";
 
 			conn = ds.getConnection();
@@ -782,12 +739,6 @@ public class MemberDao {
 			pstmt1 = conn.prepareStatement(replydelete);
 			pstmt1.setString(1, no);
 			resultRow = pstmt1.executeUpdate();
-
-			/*
-			 * if(rs.next()) { if(pwd.equals(dbpwd)){ pstmt.close(); pstmt =
-			 * conn.prepareStatement(replydelete); pstmt.setString(1, no); row =
-			 * pstmt.executeUpdate(); }else { row = 0; } }else { row =-1; }
-			 */
 
 		} catch (Exception e) {
 
@@ -879,7 +830,6 @@ public class MemberDao {
 			if (bookmarkcheck == 0) {
 				resultRow = writeok(board);
 
-//				sql1 = "select idx,userid,title,to_char(writedate),lovenum from board where idx = ? and userid = ?";
 				sql1 = "select idx,userid,title,to_char(writedate,'yyyy-MM-dd') as writedate from board where idx = ?";
 				pstmt1 = conn.prepareStatement(sql1);
 				pstmt1.setInt(1, bookmarks.getIdx());
@@ -887,33 +837,24 @@ public class MemberDao {
 				rs1 = pstmt1.executeQuery();
 
 				if (rs1.next()) {
-					System.out.println("if문 진입");
-					idx = rs1.getInt("idx");
-					System.out.println(idx);
-					String writerid = rs1.getString("userid"); // board 테이블의 userid, 즉 작성자의 id
-					System.out.println(writerid);
-					String title = rs1.getString("title");
-					System.out.println(title);
-					String writedate = rs1.getString("writedate"); // board 테이블의 writedate
-					System.out.println(writedate);
 
-					// SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyymmdd");
+					idx = rs1.getInt("idx");
+					String writerid = rs1.getString("userid"); // board 테이블의 userid, 즉 작성자의 id
+					String title = rs1.getString("title");
+					String writedate = rs1.getString("writedate"); // board 테이블의 writedate
+
+
 					SimpleDateFormat afterFormat = new SimpleDateFormat("yyyy-mm-dd");
 					java.util.Date tempDate = null;
 					tempDate = afterFormat.parse(writedate);
 					String transDate = afterFormat.format(tempDate);
 					Date writedateD = Date.valueOf(transDate);
-					System.out.println(writedateD);
 
-					// String date = rs1.getString("writedate");
-					// java.sql.Date writedate = java.sql.Date.valueOf(date);
 
-					System.out.println("userid : " + writerid + " title : " + title + "writedate : " + writedate);
-//						int lovenum = rs1.getInt("lovenum");
 
 					sql2 = "insert into bookmarks (bookidx, idx, userid, writerid, title, writedate, lovenum) "
 							+ "values (book_idx.nextval, ?, ?, ?, ?, ?, 7)";
-					System.out.println(sql2);
+
 					pstmt2 = conn.prepareStatement(sql2);
 					pstmt2.setInt(1, idx);
 					pstmt2.setString(2, bookmarks.getUserid()); // bookmarks.getUserid(): session에 있는 userid, 즉 로그인 되어
@@ -921,10 +862,8 @@ public class MemberDao {
 					pstmt2.setString(3, writerid);
 					pstmt2.setString(4, title);
 					pstmt2.setDate(5, writedateD);
-					System.out.println(pstmt2.toString());
-					// pstmt2.setInt(5, bookmarks.getLovenum());
+
 					resultRow = pstmt2.executeUpdate();
-					System.out.println("insert 성공!");
 
 				}
 
@@ -934,7 +873,7 @@ public class MemberDao {
 				pstmt2.setInt(1, bookmarks.getIdx());
 				pstmt2.setString(2, bookmarks.getUserid());
 				resultRow = pstmt2.executeUpdate();
-				System.out.println("delete 성공!");
+
 			}
 
 			conn.commit();
@@ -958,7 +897,7 @@ public class MemberDao {
 				}
 			}
 		}
-		System.out.println("bookmarks update 성공! resultRow 반환할거다");
+
 		return resultRow;
 	}
 

@@ -44,7 +44,6 @@ public class UpdateService implements Action {
 		    String url="";
 			
 			check = dao.update(memberdetail);
-			System.out.println("check : "+check);
 			if (check > 0) {
 				msg="회원정보 수정 완료";
 			    url="index.user";

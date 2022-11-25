@@ -61,8 +61,6 @@ public class UserDeleteService implements Action {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(forward);
-		
 		
 		return forward;
 	}
