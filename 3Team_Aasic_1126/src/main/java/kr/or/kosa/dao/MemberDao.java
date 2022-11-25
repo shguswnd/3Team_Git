@@ -525,6 +525,7 @@ public class MemberDao {
 
 	// 회원 등급 변경
 
+
 	// 게시글 수정하기 화면(답글)
 	public Board getEditContent(String idx) {
 		return this.getContent(Integer.parseInt(idx));
@@ -533,7 +534,7 @@ public class MemberDao {
 
 	// 게시글 수정하기 처리
 	public int boardEdit(String idx, String userid, String content, String title, String filename) {
-		
+
 		try {
 			conn = ds.getConnection();
 			String sql_userid = "select userid from board where idx=?";// and userid=?
@@ -551,6 +552,7 @@ public class MemberDao {
 				pstmt1.setString(2, title);
 				pstmt1.setString(3, content);
 				pstmt1.setString(4, idx);
+
 				resultRow = pstmt1.executeUpdate();
 			}
 		} catch (Exception e) {
@@ -686,6 +688,7 @@ public class MemberDao {
 		ArrayList<Reply> list = null;
 
 		try {
+
 			conn = ds.getConnection();
 			String reply_sql = "select * from reply where idx= ? order by replynum desc";
 
@@ -696,6 +699,7 @@ public class MemberDao {
 
 			list = new ArrayList<>();
 			while (rs1.next()) {
+
 				Reply replydto = new Reply();
 				replydto.setReplynum(Integer.parseInt(rs1.getString("replynum")));
 				replydto.setParentreply(rs1.getInt("parentreply"));
@@ -735,6 +739,7 @@ public class MemberDao {
 			pstmt1 = conn.prepareStatement(replydelete);
 			pstmt1.setString(1, no);
 			resultRow = pstmt1.executeUpdate();
+
 		} catch (Exception e) {
 
 		} finally {
@@ -824,6 +829,7 @@ public class MemberDao {
 
 			if (bookmarkcheck == 0) {
 				resultRow = writeok(board);
+
 				sql1 = "select idx,userid,title,to_char(writedate,'yyyy-MM-dd') as writedate from board where idx = ?";
 				pstmt1 = conn.prepareStatement(sql1);
 				pstmt1.setInt(1, bookmarks.getIdx());
@@ -831,10 +837,12 @@ public class MemberDao {
 				rs1 = pstmt1.executeQuery();
 
 				if (rs1.next()) {
+
 					idx = rs1.getInt("idx");
 					String writerid = rs1.getString("userid"); // board 테이블의 userid, 즉 작성자의 id
 					String title = rs1.getString("title");
 					String writedate = rs1.getString("writedate"); // board 테이블의 writedate
+
 
 					SimpleDateFormat afterFormat = new SimpleDateFormat("yyyy-mm-dd");
 					java.util.Date tempDate = null;
@@ -843,8 +851,10 @@ public class MemberDao {
 					Date writedateD = Date.valueOf(transDate);
 
 
+
 					sql2 = "insert into bookmarks (bookidx, idx, userid, writerid, title, writedate, lovenum) "
 							+ "values (book_idx.nextval, ?, ?, ?, ?, ?, 7)";
+
 					pstmt2 = conn.prepareStatement(sql2);
 					pstmt2.setInt(1, idx);
 					pstmt2.setString(2, bookmarks.getUserid()); // bookmarks.getUserid(): session에 있는 userid, 즉 로그인 되어
@@ -852,7 +862,9 @@ public class MemberDao {
 					pstmt2.setString(3, writerid);
 					pstmt2.setString(4, title);
 					pstmt2.setDate(5, writedateD);
+
 					resultRow = pstmt2.executeUpdate();
+
 				}
 
 			} else if (bookmarkcheck == 1) {
@@ -861,7 +873,9 @@ public class MemberDao {
 				pstmt2.setInt(1, bookmarks.getIdx());
 				pstmt2.setString(2, bookmarks.getUserid());
 				resultRow = pstmt2.executeUpdate();
+
 			}
+
 			conn.commit();
 			conn.setAutoCommit(true);
 
@@ -883,6 +897,7 @@ public class MemberDao {
 				}
 			}
 		}
+
 		return resultRow;
 	}
 
