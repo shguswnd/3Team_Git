@@ -56,7 +56,7 @@ public class UserController extends HttpServlet {
     		forward.setPath("/index.jsp");
     		
 	    } else if(urlcommand.equals("/userEditInfo.user")) { //트러블슈팅 파일 상세보기 비동기
-	   	 	forward = new ActionForward();
+	    	forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/WEB-INF/views/web/userInfoEdit.jsp");
     		
