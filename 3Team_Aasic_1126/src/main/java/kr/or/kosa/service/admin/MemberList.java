@@ -21,11 +21,7 @@ public class MemberList implements Action {
 		try {
 			AdminDao adminDao = new AdminDao();
 			List<MemberDetail> memberList = adminDao.getAllMemberList();
-			
-			//int check = adminDao.stop(userid);
 			request.setAttribute("memberList", memberList);
-			System.out.println(memberList);
-			
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/WEB-INF/views/admin/admin_delete.jsp");				

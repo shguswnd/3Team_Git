@@ -20,7 +20,6 @@ public class BoardEditService implements Action {
 		String filename = request.getParameter("filename");
 		String msg="";
 	    String url="";
-	    System.out.println("보드에딧서비스boardname:"+boardname);
 
 		MemberDao member;
 		Files files = new Files();
@@ -33,7 +32,6 @@ public class BoardEditService implements Action {
 
 			member = new MemberDao();
 			
-			//BoardService service = BoardService.getInBoardService();
 			Board board = member.getEditContent(idx);  //게시물 상세보기 함수 재활용
 			
 			if(board == null){  //게시물이 뭔가 잘못 됬다면 오류메시지
@@ -49,20 +47,16 @@ public class BoardEditService implements Action {
 				forward = new ActionForward();
 				forward.setRedirect(false);
 				forward.setPath("/WEB-INF/views/web/redirect.jsp");
-				System.out.println("이거나오면 오류");
-				
 			}else {  //잘 수정 됬다면
 				request.setAttribute("idx", idx);  //해당 글번호의 수정페이지로 가기위해 글번호 받아서 보내고
 				request.setAttribute("board", board);
 				request.setAttribute("boardname", boardname);
 				request.setAttribute("filename", filename);
 				request.setAttribute("files", files);
-				
 				forward = new ActionForward();
 				forward.setRedirect(false);
 				forward.setPath("/WEB-INF/views/web/boardEdit.jsp");  //게시물 수정 화면 보여준다
 				
-				System.out.println("잘 처리되서 수정페이지 띄워주는지?");
 			}
 
 		} catch (Exception e) {

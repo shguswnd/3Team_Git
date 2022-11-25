@@ -12,7 +12,7 @@
 		    <c:when test="${sessionScope.userid ne null}">
 		          ${sessionScope.userid } 님
 		          <a href = "logout.do">log out</a>		 
-		          <a href = "userEditInfo.user">내정보 수정</a>	  
+		          <a href = "userEditInfo.user?userid=${sessionScope.userid}">내정보 수정</a>	  
 		          <a href = "userDelete.do">회원 탈퇴하기</a>    
 		          <a href="bookMarksList.user">북마크 목록</a>	
 		    </c:when>

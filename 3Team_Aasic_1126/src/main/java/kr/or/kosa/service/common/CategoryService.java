@@ -18,11 +18,8 @@ public class CategoryService implements Action {
 		
 		try {
 			CommonDao commonDao = new CommonDao();
-			
 			List<Category> categoryList;
 			categoryList = commonDao.getAllCategory();
-			System.out.println(categoryList);
-//			System.exit(0);
 			request.setAttribute("categoryList", categoryList);
 			forward = new ActionForward();
 			forward.setRedirect(false);

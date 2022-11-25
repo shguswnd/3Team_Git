@@ -40,11 +40,9 @@ public class FileService implements Action {
 		
 		request.setAttribute("idx_fk", idx);
 		request.setAttribute("filename", filename);
-
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("/WEB-INF/views/web/boardFileView.jsp"); //파일만 크게 보여주는 페이지 불러옴
-		/* forward.setPath("/WEB-INF/views/board/redirect.jsp"); */
 
 		return forward;
 	}
