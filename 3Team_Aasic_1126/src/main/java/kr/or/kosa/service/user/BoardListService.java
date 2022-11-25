@@ -24,9 +24,6 @@ public class BoardListService implements Action {
 			// 상세보기 >> 다시 LIST 넘어올때 >> 현재 페이지 설정
 			String ps = request.getParameter("ps"); // pagesize
 			String cp = request.getParameter("cp"); // current page
-			System.out.println(ps);
-			System.out.println(cp);
-			System.out.println(boardname);
 			// List 페이지 처음 호출 ... 기본 값 설정
 			if (ps == null || ps.trim().equals("")) {
 				// default 값 설정
@@ -55,7 +52,6 @@ public class BoardListService implements Action {
 			List<Board> boardList = memberDao.list(cpage, pagesize, boardname); // list >> 1 , 20
 
 			int pagersize = 3; // [1][2][3]
-//			ThePager pager = new ThePager(totalboardcount,cpage,pagesize,pagersize,"BoardList.board");
 
 			request.setAttribute("pagesize", pagesize);
 			request.setAttribute("cpage", cpage);
@@ -63,8 +59,6 @@ public class BoardListService implements Action {
 			request.setAttribute("boardList", boardList);
 			request.setAttribute("totalboardcount", totalboardcount);
 			request.setAttribute("boardname", boardname);
-//			request.setAttribute("pager", pager);
-
 			forward = new ActionForward();
 			forward.setRedirect(false); // forward
 			forward.setPath("/WEB-INF/views/common/board_list.jsp");

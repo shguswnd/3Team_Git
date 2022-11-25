@@ -17,8 +17,6 @@ public class LoveUpdate2 implements Action {
 
 		try {
 
-			// System.out.println("loveupdate 서비스 진입");
-
 			MemberDao member = new MemberDao();
 			Love love = new Love();
 			String userid = request.getParameter("userid");
@@ -27,8 +25,6 @@ public class LoveUpdate2 implements Action {
 			love.setIdx(idx);
 			love.setUserid(userid);
 			
-			System.out.println("set  love: " + love.toString());
-
 
 			int resultrow = member.loveCheck(love);
 
@@ -48,17 +44,9 @@ public class LoveUpdate2 implements Action {
 				forward.setRedirect(false);
 				forward.setPath("/WEB-INF/views/board/board_content.jsp");
 			}
-
-			System.out.println("count 도는중. ..");
-
-			System.out.println("카운트 이후 love: " + love.toString());
-			
 			member.loveCount(idx);
-			System.out.println("idx parameter: " + idx);
 			int lovecount = member.loveCount(idx);
 			request.setAttribute("lovecount: ", lovecount);
-			System.out.println(lovecount);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

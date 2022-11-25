@@ -11,16 +11,15 @@
 <title>user_password</title>
 </head>
 <body>
-<%-- 	<c:set var="board" value="${requestScope.board}" /> --%>	
-	 <c:set var="userid" value="${requestScope.userid}" />
-	 <c:set var="boardname" value="${requestScope.boardname}" />
-
 <jsp:include page="/WEB-INF/views/include/userHeader.jsp"></jsp:include>
+<%-- 	<c:set var="board" value="${requestScope.board}" /> --%>	
+	 <c:set var="userid" value="${sessionScope.userid}" />
+	 <c:set var="boardname" value="${requestScope.boardname}" />
 	<div id="pageContainer">
 		<div style="padding-top: 30px; text-align: center">
 			<center>
 				<b>${userid} 회원님의 계정 비밀번호를 입력하세요</b>
-				<form name="bbs" action="update.user" method="POST">
+				<form name="info" action="update.user" method="POST">
 				<input type="password" name="pwd" size="5">
 				<input type="hidden" name="userid" value="${userid}">
 				<input type="submit" value="비밀번호 확인">

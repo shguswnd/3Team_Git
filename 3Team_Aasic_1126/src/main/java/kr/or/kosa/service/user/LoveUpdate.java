@@ -24,17 +24,12 @@ public class LoveUpdate implements Action {
 			String userid = (String)session.getAttribute("userid");
 			int idx = Integer.parseInt(request.getParameter("idx"));
 			
-			System.out.println("userid: " + userid);
-			System.out.println("idx: " + idx);
-
 			love.setIdx(idx);
 			love.setUserid(userid);
 			
-			System.out.println(love.toString());
 			
 			int resultrow = member.loveCheck(love);
 			
-			System.out.println("추천 체크: " + resultrow);
 			
 			if (resultrow == 0 || resultrow==1) {
 				// 추천하기
@@ -42,8 +37,6 @@ public class LoveUpdate implements Action {
 				member.loveCount(idx);
 				int lovecount = member.loveCount(idx);
 				request.setAttribute("lovecount", lovecount);
-				
-				System.out.println("이프문탓냐고: " + lovecount);
 				
 				forward = new ActionForward();
 				forward.setRedirect(false);
@@ -53,7 +46,6 @@ public class LoveUpdate implements Action {
 			e.printStackTrace();
 		}
 
-		System.out.println("포워드");
 		
 		return forward;
 

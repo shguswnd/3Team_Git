@@ -24,7 +24,6 @@ public class MemberEditService implements Action {
 			forward = new ActionForward();
 			forward.setRedirect(false);
     		forward.setPath("/WEB-INF/views/admin/edit.jsp");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

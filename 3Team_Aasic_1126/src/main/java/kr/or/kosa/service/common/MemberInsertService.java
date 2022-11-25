@@ -24,7 +24,7 @@ public class MemberInsertService implements Action {
 			String name = request.getParameter("name");
 			String firstEmail = request.getParameter("firstEmail");
 			String lastEmail = request.getParameter("lastEmail");
-			String email = firstEmail + lastEmail;
+			String email = firstEmail + "@" + lastEmail;
 			String firstNumber = request.getParameter("firstNumber");
 			String phoneNumber = request.getParameter("phoneNumber");
 			String Phone = (firstNumber + phoneNumber);

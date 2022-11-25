@@ -117,9 +117,15 @@
 											<div>Please, enter your Name!</div>
 										</div>
 										<div>
-											<label for="your Email">Your Email</label> <input type="text"
-												name="firstEmail" id="firstEmail" required> @ <input
-												type="text" name="lastEmail" id="lastEmail" required>
+											<label for="your Email">Your Email</label> 
+												<input type="text" name="firstEmail" id="firstEmail" required> @
+												
+												<select id="lastEmail" name="lastEmail">
+													<option value="" selected="selected">선택해주세요.</option>
+													<option value="naver.com">naver.com</option>
+													<option value="google.com">google.com</option>
+													<option value="daum.net">daum.net</option>
+												</select> 
 											<div>Please, enter your Email!</div>
 										</div>
 										<div>

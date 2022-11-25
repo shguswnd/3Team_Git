@@ -16,7 +16,6 @@ public class BookMarksService implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
-		System.out.println("세션 userid"+(String) request.getSession().getAttribute("userid"));
 		try {
 			MemberDao memberdao = new MemberDao();
 			Bookmarks bookmarks = new Bookmarks();
@@ -25,15 +24,12 @@ public class BookMarksService implements Action{
 			int idx = Integer.parseInt(request.getParameter("idx")); //board_content.jsp의 name을 getParameter로 가져온다
 			HttpSession session = request.getSession();//세션객체생성은 로그인체크에서만.
 			String userid = (String)session.getAttribute("userid");
-			System.out.println("원래 코드 userid : " + userid);
 			bookmarks.setIdx(idx);
 			bookmarks.setUserid(userid);
 		
 	
 			int resultrow = memberdao.bookmarkCheck(bookmarks);
-			
-			System.out.println(resultrow);
-			
+						
 			if(resultrow ==0) {
 				//북마크 하기
 				

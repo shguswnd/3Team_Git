@@ -36,7 +36,6 @@ public class MemberActivateService implements Action {
 				forward.setPath("/WEB-INF/views/admin/admin.jsp");				
 			}
 			else {
-				System.out.println("잘못됨");
 				forward.setPath("/WEB-INF/views/admin/admin.jsp");
 			}
 
